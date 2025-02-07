@@ -1,0 +1,42 @@
+import { Button, VerticalBox , LineEdit} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    in property <string> input;
+    in-out property <string> result;
+    callback check(string);
+    VerticalLayout {
+        padding: 50px;
+        spacing: 20px;
+        Text {
+            text: "Enter Your Guess!";
+            font-size: 20px;
+            horizontal-alignment: center;
+        }
+
+        input := LineEdit {
+            font-size: 16px;
+            placeholder-text: @tr("Enter value between 0 to 100");
+            height: 35px;
+            input-type: decimal;
+        }
+
+        Button {
+            text: "Check !";
+            primary: true;
+            height: 35px;
+            clicked => {
+                root.check(input.text);
+            }
+        }
+
+        Rectangle {
+            height: 100px;
+            background: ghostwhite;
+            Text {
+                color: black;
+                font-size: 15px;
+                text: root.result;
+            }
+        }
+    }
+}
